@@ -2,21 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mutaz CNC v16 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            background: #f0f0f0;
-            color: #333;
+            background: linear-gradient(135deg, #1e3a8a, #4c1d95);
+            color: #f1f5f9;
+            min-height: 100vh;
             overflow-x: hidden;
             direction: rtl;
         }
@@ -28,12 +29,12 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            opacity: 0.3;
         }
 
         /* Header */
         header {
-            background: linear-gradient(to right, #4caf50, #333);
-            color: #fff;
+            background: linear-gradient(to right, #1e3a8a, #4c1d95);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -41,6 +42,7 @@
             position: fixed;
             width: 100%;
             z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -51,10 +53,16 @@
         .logo i {
             font-size: 2rem;
             margin-left: 1rem;
+            color: #3b82f6;
         }
 
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         nav ul {
@@ -67,14 +75,14 @@
         }
 
         nav ul li a {
-            color: #fff;
+            color: #f1f5f9;
             text-decoration: none;
             font-size: 1.1rem;
             transition: color 0.3s;
         }
 
         nav ul li a:hover {
-            color: #4caf50;
+            color: #3b82f6;
         }
 
         /* Main Section */
@@ -90,15 +98,19 @@
         .content h2 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
-            color: #333;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .program-img {
             max-width: 600px;
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
+            border: 2px solid #3b82f6;
         }
 
         .buttons {
@@ -108,19 +120,18 @@
         }
 
         .btn {
-            background: #4caf50;
-            color: #fff;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            color: #f1f5f9;
             padding: 0.8rem 1.5rem;
             border: none;
             border-radius: 5px;
             text-decoration: none;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.3s;
         }
 
         .btn:hover {
-            background: #45a049;
             transform: scale(1.05);
         }
 
@@ -136,39 +147,42 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
             z-index: 100;
         }
 
         .modal-content {
-            background: #fff;
+            background: #1e3a8a;
             padding: 2rem;
             border-radius: 10px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: right;
+            border: 1px solid #3b82f6;
         }
 
         .modal-content h2 {
             margin-bottom: 1.5rem;
-            color: #333;
+            color: #f1f5f9;
         }
 
         .modal-content label {
             display: block;
             margin: 0.5rem 0;
-            color: #333;
+            color: #f1f5f9;
         }
 
         .modal-content input {
             width: 100%;
             padding: 0.5rem;
             margin-bottom: 1rem;
-            border: 1px solid #ccc;
+            border: 1px solid #3b82f6;
             border-radius: 5px;
+            background: #f1f5f9;
+            color: #1e3a8a;
         }
 
         .submit-btn {
@@ -181,13 +195,13 @@
             left: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #333;
+            color: #f1f5f9;
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: #fff;
+            background: linear-gradient(to right, #1e3a8a, #4c1d95);
+            color: #f1f5f9;
             text-align: center;
             padding: 1rem;
             position: relative;
@@ -200,18 +214,18 @@
         }
 
         .social-icons a {
-            color: #fff;
+            color: #f1f5f9;
             margin: 0 0.5rem;
             font-size: 1.5rem;
             transition: color 0.3s;
         }
 
         .social-icons a:hover {
-            color: #4caf50;
+            color: #3b82f6;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 576px) {
             header {
                 flex-direction: column;
                 text-align: center;
@@ -230,8 +244,16 @@
                 font-size: 1.8rem;
             }
 
+            .program-img {
+                max-width: 90%;
+            }
+
             .buttons {
                 flex-direction: column;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -306,6 +328,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script>
         // Three.js Background
         const scene = new THREE.Scene();
@@ -346,13 +369,67 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
+        // GSAP Animations
+        gsap.from(".logo h1", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        gsap.from(".logo i", {
+            opacity: 0,
+            scale: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.3)"
+        });
+
+        gsap.from(".content h2", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.3,
+            ease: "power3.out"
+        });
+
+        gsap.from(".program-img", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1,
+            delay: 0.6,
+            ease: "power3.out"
+        });
+
+        gsap.from(".buttons .btn", {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            delay: 0.9,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
         // Activation Modal
         function showActivationModal() {
             document.getElementById('activationModal').style.display = 'flex';
+            gsap.from(".modal-content", {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.5,
+                ease: "power3.out"
+            });
         }
 
         function closeActivationModal() {
-            document.getElementById('activationModal').style.display = 'none';
+            gsap.to(".modal-content", {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.3,
+                ease: "power3.in",
+                onComplete: () => {
+                    document.getElementById('activationModal').style.display = 'none';
+                }
+            });
         }
 
         // Form Submission
