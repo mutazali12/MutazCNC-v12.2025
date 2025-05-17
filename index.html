@@ -34,7 +34,8 @@
 
         /* Header */
         header {
-            background: linear-gradient(to right, #1e3a8a, #4c1d95);
+            background: rgba(30, 58, 138, 0.7); /* #1e3a8a مع شفافية */
+            backdrop-filter: blur(5px); /* تأثير زجاجي */
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -68,6 +69,8 @@
         nav ul {
             list-style: none;
             display: flex;
+            flex-direction: row; /* أفقي */
+            align-items: center;
         }
 
         nav ul li {
@@ -232,7 +235,7 @@
             }
 
             nav ul {
-                flex-direction: column;
+                flex-direction: column; /* رأسي على الشاشات الصغيرة */
                 margin-top: 1rem;
             }
 
