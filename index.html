@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Mutaz CNC v16 2025 - برنامج متقدم للتحكم بماكينات البلازما CNC">
     <title>Mutaz CNC v16 2025</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" onerror="console.warn('فشل تحميل Font Awesome')">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -32,10 +33,9 @@
             opacity: 0.3;
         }
 
-        /* Header */
         header {
-            background: rgba(30, 58, 138, 0.7); /* #1e3a8a مع شفافية */
-            backdrop-filter: blur(5px); /* تأثير زجاجي */
+            background: rgba(30, 58, 138, 0.7);
+            backdrop-filter: blur(5px);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -64,12 +64,13 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            color: #3b82f6; /* احتياطي */
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            flex-direction: row; /* أفقي */
+            flex-direction: row;
             align-items: center;
         }
 
@@ -88,7 +89,6 @@
             color: #3b82f6;
         }
 
-        /* Main Section */
         .main-section {
             min-height: 100vh;
             display: flex;
@@ -96,6 +96,7 @@
             align-items: center;
             text-align: center;
             padding: 100px 20px;
+            position: relative; /* لضمان ظهور المحتوى فوق الخلفية */
         }
 
         .content h2 {
@@ -105,6 +106,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            color: #3b82f6; /* احتياطي */
         }
 
         .program-img {
@@ -142,7 +144,6 @@
             margin-left: 0.5rem;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -201,7 +202,6 @@
             color: #f1f5f9;
         }
 
-        /* Footer */
         footer {
             background: linear-gradient(to right, #1e3a8a, #4c1d95);
             color: #f1f5f9;
@@ -227,7 +227,22 @@
             color: #3b82f6;
         }
 
-        /* Responsive */
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 576px) {
             header {
                 flex-direction: column;
@@ -235,7 +250,7 @@
             }
 
             nav ul {
-                flex-direction: column; /* رأسي على الشاشات الصغيرة */
+                flex-direction: column;
                 margin-top: 1rem;
             }
 
@@ -285,12 +300,12 @@
     <section id="home" class="main-section">
         <div class="content">
             <h2>برنامج متقدم لتحكم ماكينات البلازما CNC</h2>
-            <img src="mutaz/program-screenshot.png" alt="واجهة Mutaz CNC" class="program-img">
+            <img src="mutaz/program-screenshot.png" alt="واجهة Mutaz CNC" class="program-img" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=صورة+غير+متوفرة'">
             <div class="buttons">
-                <a href="mutaz/mutazcnc.rar" class="btn download-btn">
+                <a href="mutaz/mutazcnc.rar" class="btn download-btn" aria-label="تحميل برنامج Mutaz CNC">
                     <i class="fas fa-download"></i> تحميل البرنامج
                 </a>
-                <button class="btn activate-btn" onclick="showActivationModal()">
+                <button class="btn activate-btn" onclick="showActivationModal()" aria-label="تفعيل برنامج Mutaz CNC">
                     <i class="fas fa-key"></i> تفعيل البرنامج
                 </button>
             </div>
@@ -300,7 +315,7 @@
     <!-- Activation Modal -->
     <div id="activationModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeActivationModal()">×</span>
+            <span class="close" onclick="closeActivationModal()" aria-label="إغلاق النافذة">×</span>
             <h2>تفعيل Mutaz CNC v16 2025</h2>
             <form id="activationForm">
                 <label for="name">الاسم:</label>
@@ -312,6 +327,7 @@
                 <label for="uuid">المعرف الفريد (من واجهة البرنامج):</label>
                 <input type="text" id="uuid" name="uuid" required>
                 <button type="submit" class="btn submit-btn">إرسال البيانات</button>
+                <div class="loader" id="loader"></div>
             </form>
             <p>بعد الإرسال، تواصل مع البائع عبر <a href="https://wa.me/249912500618">واتساب</a> للحصول على كود التفعيل.</p>
         </div>
@@ -321,129 +337,169 @@
     <footer>
         <p>© 2025 Mutaz CNC. All Rights Reserved.</p>
         <div class="social-icons">
-            <a href="https://www.facebook.com/share/1Hupigowe8/" target="_blank">
+            <a href="https://www.facebook.com/share/1Hupigowe8/" target="_blank" aria-label="فيسبوك">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://wa.me/249912500618" target="_blank">
+            <a href="https://wa.me/249912500618" target="_blank" aria-label="واتساب">
                 <i class="fab fa-whatsapp"></i>
             </a>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r167/three.min.js" onerror="console.warn('فشل تحميل Three.js')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" onerror="console.warn('فشل تحميل GSAP')"></script>
     <script>
         // Three.js Background
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.z = 30;
-
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 5000;
-        const posArray = new Float32Array(particlesCount * 3);
-
-        for (let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 100;
-        }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.1,
-            color: 0x4caf50,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-
-        function animate() {
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+        try {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+            camera.position.z = 30;
+
+            const particlesCount = 2000; // تقليل عدد الجسيمات لتحسين الأداء
+            const particlesGeometry = new THREE.BufferGeometry();
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                color: 0x4caf50,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.y += 0.001;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        } catch (e) {
+            console.warn('خطأ في تهيئة Three.js:', e);
+        }
 
         // GSAP Animations
-        gsap.from(".logo h1", {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: "power3.out"
-        });
+        try {
+            gsap.from(".logo h1", {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out"
+            });
 
-        gsap.from(".logo i", {
-            opacity: 0,
-            scale: 0,
-            duration: 1,
-            ease: "elastic.out(1, 0.3)"
-        });
+            gsap.from(".logo i", {
+                opacity: 0,
+                scale: 0,
+                duration: 1,
+                ease: "elastic.out(1, 0.3)"
+            });
 
-        gsap.from(".content h2", {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 0.3,
-            ease: "power3.out"
-        });
+            gsap.from(".content h2", {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.3,
+                ease: "power3.out"
+            });
 
-        gsap.from(".program-img", {
-            opacity: 0,
-            scale: 0.8,
-            duration: 1,
-            delay: 0.6,
-            ease: "power3.out"
-        });
+            gsap.from(".program-img", {
+                opacity: 0,
+                scale: 0.8,
+                duration: 1,
+                delay: 0.6,
+                ease: "power3.out"
+            });
 
-        gsap.from(".buttons .btn", {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            delay: 0.9,
-            stagger: 0.2,
-            ease: "power3.out"
-        });
+            gsap.from(".buttons .btn", {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                delay: 0.9,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        } catch (e) {
+            console.warn('خطأ في GSAP:', e);
+        }
 
         // Activation Modal
         function showActivationModal() {
-            document.getElementById('activationModal').style.display = 'flex';
-            gsap.from(".modal-content", {
-                opacity: 0,
-                scale: 0.8,
-                duration: 0.5,
-                ease: "power3.out"
-            });
+            const modal = document.getElementById('activationModal');
+            modal.style.display = 'flex';
+            try {
+                gsap.from(".modal-content", {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.5,
+                    ease: "power3.out"
+                });
+            } catch (e) {
+                console.warn('خطأ في GSAP Modal:', e);
+            }
         }
 
         function closeActivationModal() {
-            gsap.to(".modal-content", {
-                opacity: 0,
-                scale: 0.8,
-                duration: 0.3,
-                ease: "power3.in",
-                onComplete: () => {
-                    document.getElementById('activationModal').style.display = 'none';
-                }
-            });
+            try {
+                gsap.to(".modal-content", {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.3,
+                    ease: "power3.in",
+                    onComplete: () => {
+                        document.getElementById('activationModal').style.display = 'none';
+                    }
+                });
+            } catch (e) {
+                document.getElementById('activationModal').style.display = 'none';
+                console.warn('خطأ في إغلاق Modal:', e);
+            }
         }
 
         // Form Submission
         document.getElementById('activationForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const submitBtn = document.querySelector('.submit-btn');
+            const loader = document.getElementById('loader');
+            submitBtn.disabled = true;
+            loader.style.display = 'block';
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const uuid = document.getElementById('uuid').value;
 
-            // Calculate activation code
+            // التحقق من الإدخال
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('يرجى إدخال بريد إلكتروني صالح.');
+                submitBtn.disabled = false;
+                loader.style.display = 'none';
+                return;
+            }
+
+            const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('يرجى إدخال رقم هاتف صالح.');
+                submitBtn.disabled = false;
+                loader.style.display = 'none';
+                return;
+            }
+
+            // حساب كود التفعيل
             const lastFive = parseInt(uuid.slice(-5));
             const activationCode = (lastFive * 5) + 9;
 
@@ -470,6 +526,9 @@
             } catch (error) {
                 alert('خطأ في إرسال البيانات. حاول مرة أخرى.');
                 console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                loader.style.display = 'none';
             }
         });
     </script>
